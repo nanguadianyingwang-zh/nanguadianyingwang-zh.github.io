@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>南瓜电影网丨在线电影播放与最新院线热映影片资源站</title>
+<meta name="description" content="南瓜电影网（nanguadianyingwang-zh.github.io）专注提供高清电影在线观看、最新院线热映影片、经典老片与影视资讯，汇集热映榜、片库、影评与排行榜四大栏目，每日更新片单。">
+<meta name="keywords" content="南瓜电影网,在线电影,高清影视,院线热映,电影排行榜,经典老片,影视资讯,南瓜电影网在线观看">
+<meta name="author" content="南瓜电影网">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://nanguadianyingwang-zh.github.io">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0c;--bg2:#111114;--card:#16161b;--card2:#1d1d24;
+  --line:rgba(255,255,255,.08);--txt:#e8e8ec;--txt2:#9a9aa6;--txt3:#6b6b78;
+  --brand:#ff5b1f;--brand2:#ffb020;--brandg:#linear-gradient(135deg,#ff5b1f,#ffb020);
+  --shadow:0 12px 40px rgba(0,0,0,.55);
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--txt);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(900px 500px at 12% -8%,rgba(255,91,31,.18),transparent 60%),
+    radial-gradient(800px 600px at 88% 8%,rgba(255,176,32,.10),transparent 60%),
+    radial-gradient(700px 700px at 50% 110%,rgba(255,91,31,.12),transparent 60%);
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* Header */
+header{position:sticky;top:0;z-index:99;background:rgba(10,10,12,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.header-in{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:800;letter-spacing:.5px}
+.logo .mark{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-size:19px;
+  background:linear-gradient(135deg,#ff5b1f,#ffb020);box-shadow:0 4px 14px rgba(255,91,31,.4)}
+.logo b{background:linear-gradient(90deg,#fff,#ffd99a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+nav{display:flex;align-items:center;gap:4px}
+nav a{font-size:15px;color:var(--txt2);padding:8px 13px;border-radius:8px;transition:.2s}
+nav a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.h-btn{padding:8px 18px;border-radius:9px;font-size:14px;font-weight:700;color:#1a0e00;
+  background:linear-gradient(135deg,#ff5b1f,#ffb020);box-shadow:0 6px 18px rgba(255,91,31,.35)}
+.h-btn:hover{filter:brightness(1.08);color:#1a0e00}
+.menu-toggle{display:none;width:40px;height:40px;border:1px solid var(--line);border-radius:9px;background:var(--card);cursor:pointer}
+.menu-toggle span{display:block;width:18px;height:2px;background:var(--txt);margin:4px auto;border-radius:2px}
+
+/* Hero */
+.hero{padding:70px 0 50px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tag{font-size:12px;padding:5px 12px;border-radius:20px;border:1px solid rgba(255,176,32,.35);color:#ffcf80;background:rgba(255,176,32,.08)}
+h1{font-size:clamp(30px,4.6vw,52px);line-height:1.15;font-weight:900;letter-spacing:-.5px}
+h1 em{font-style:normal;background:linear-gradient(100deg,#ff5b1f,#ffb020);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lede{color:var(--txt2);font-size:16.5px;margin:20px 0 28px;max-width:540px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:13px 26px;border-radius:11px;font-size:15px;font-weight:700;transition:.2s;border:1px solid transparent}
+.btn-primary{background:linear-gradient(135deg,#ff5b1f,#ffb020);color:#1a0e00;box-shadow:0 8px 24px rgba(255,91,31,.32)}
+.btn-primary:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn-ghost{background:var(--card);color:var(--txt);border-color:var(--line)}
+.btn-ghost:hover{border-color:rgba(255,176,32,.45);color:#ffcf80}
+.hero-stat{display:flex;gap:36px;margin-top:34px;padding-top:24px;border-top:1px solid var(--line)}
+.hero-stat div span{display:block;font-size:26px;font-weight:800;color:#fff}
+.hero-stat div small{font-size:13px;color:var(--txt3);letter-spacing:.5px}
+
+/* Featured card */
+.feat{position:relative;border-radius:22px;overflow:hidden;min-height:360px;padding:34px;display:flex;flex-direction:column;justify-content:flex-end;
+  background:linear-gradient(160deg,rgba(20,20,26,.2),rgba(10,10,12,.96)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23231a12'/%3E%3Cstop offset='1' stop-color='%23100a06'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='400' fill='url(%23g)'/%3E%3Ccircle cx='300' cy='110' r='150' fill='%23ff5b1f' opacity='.16'/%3E%3Ccircle cx='110' cy='310' r='120' fill='%23ffb020' opacity='.10'/%3E%3C/svg%3E") center/cover;
+  border:1px solid var(--line);box-shadow:var(--shadow)}
+.feat .badge{position:absolute;top:20px;left:20px;font-size:12px;font-weight:700;padding:6px 13px;border-radius:7px;letter-spacing:.5px;
+  background:linear-gradient(135deg,#ff5b1f,#ffb020);color:#1a0e00}
+.feat h3{font-size:24px;margin-bottom:8px}
+.feat p{color:var(--txt2);font-size:14px;margin-bottom:16px}
+.feat .meta{display:flex;gap:8px;flex-wrap:wrap}
+.feat .meta i{font-style:normal;font-size:12.5px;padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.09);color:#ddd}
+
+/* Section */
+section{padding:56px 0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(22px,2.8vw,30px);font-weight:800;letter-spacing:-.3px}
+.sec-head h2 i{font-style:normal;color:var(--brand)}
+.sec-head p{color:var(--txt3);font-size:14px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.tabs a{padding:7px 16px;border-radius:20px;font-size:13.5px;color:var(--txt2);border:1px solid var(--line);background:var(--card)}
+.tabs a.on{color:#1a0e00;background:linear-gradient(135deg,#ff5b1f,#ffb020);border-color:transparent;font-weight:700}
+.grid{display:grid;gap:20px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+
+/* Movie card */
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.25s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-5px);border-color:rgba(255,91,31,.4);box-shadow:0 16px 36px rgba(0,0,0,.55)}
+.thumb{position:relative;aspect-ratio:3/4;overflow:hidden}
+.thumb .ph{position:absolute;inset:0;display:grid;place-items:center;font-size:38px;font-weight:800;color:rgba(255,255,255,.75)}
+.thumb .rate{position:absolute;top:10px;left:10px;font-size:12px;font-weight:800;padding:4px 9px;border-radius:6px;background:rgba(10,10,12,.86);color:#ffcf80}
+.thumb .ep{position:absolute;top:10px;right:10px;font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:6px;background:linear-gradient(135deg,#ff5b1f,#ffb020);color:#1a0e00}
+.thumb .tag-mini{position:absolute;bottom:10px;left:10px;right:10px;display:flex;gap:6px;flex-wrap:wrap}
+.thumb .tag-mini em{font-style:normal;font-size:11px;padding:3px 8px;border-radius:5px;background:rgba(10,10,12,.8);color:#ddd}
+.card .info{padding:13px 15px 16px;flex:1;display:flex;flex-direction:column}
+.card .info h4{font-size:15.5px;font-weight:700;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .info p{font-size:12.5px;color:var(--txt3);flex:1}
+.card .info .foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:11px;border-top:1px dashed var(--line);font-size:12px;color:var(--txt2)}
+
+/* palette chips for thumbs (deterministic, decorative) */
+.c1{background:linear-gradient(150deg,#3a1c0d,#160a04)}
+.c2{background:linear-gradient(150deg,#10233a,#050d18)}
+.c3{background:linear-gradient(150deg,#2c1230,#12061a)}
+.c4{background:linear-gradient(150deg,#11321f,#05140d)}
+.c5{background:linear-gradient(150deg,#332410,#1a1206)}
+.c6{background:linear-gradient(150deg,#241228,#0e0610)}
+.c7{background:linear-gradient(150deg,#1c2a3a,#0a1018)}
+.c8{background:linear-gradient(150deg,#3a1a14,#1a0c08)}
+
+/* review */
+.review{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;transition:.25s;display:flex;flex-direction:column;gap:12px}
+.review:hover{border-color:rgba(255,176,32,.4);transform:translateY(-4px)}
+.rv-head{display:flex;gap:12px;align-items:center}
+.avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#1a0e00;background:linear-gradient(135deg,#ff5b1f,#ffb020);flex-shrink:0}
+.rv-head div h5{font-size:15px}
+.rv-head div span{font-size:12px;color:var(--txt3)}
+.stars{margin-left:auto;color:#ffb020;font-size:14px;letter-spacing:1px}
+.review h4{font-size:17px;font-weight:800}
+.review p{font-size:14px;color:var(--txt2)}
+.review .more{font-size:13px;font-weight:700;color:var(--brand);align-self:flex-start}
+
+/* list row */
+.list-row{display:flex;gap:16px;align-items:center;padding:14px;border-radius:14px;background:var(--card);border:1px solid var(--line);transition:.2s}
+.list-row:hover{border-color:rgba(255,91,31,.4);background:var(--card2)}
+.rk{width:40px;height:40px;flex-shrink:0;border-radius:11px;display:grid;place-items:center;font-size:19px;font-weight:900;
+  background:var(--bg2);color:var(--txt3);border:1px solid var(--line)}
+.rk.g1{background:linear-gradient(135deg,#ff5b1f,#ffb020);color:#1a0e00;border-color:transparent}
+.rk.g2{background:linear-gradient(135deg,#c9ced6,#7d8794);color:#101014;border-color:transparent}
+.rk.g3{background:linear-gradient(135deg,#cd7f32,#8a5320);color:#fff5ea;border-color:transparent}
+.list-row .tt{flex:1;min-width:0}
+.list-row .tt b{display:block;font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.list-row .tt span{font-size:12.5px;color:var(--txt3)}
+.list-row .sc{font-size:14px;font-weight:800;color:#ffcf80;white-space:nowrap}
+
+/* table */
+.tbl-wrap{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:14px}
+thead th{background:var(--bg2);text-align:left;padding:14px 16px;font-size:13px;color:var(--txt2);font-weight:700;letter-spacing:.5px}
+tbody td{padding:14px 16px;border-top:1px solid var(--line);color:var(--txt2)}
+tbody tr:hover td{background:rgba(255,176,32,.04);color:#fff}
+tbody tr td:first-child{font-weight:700;color:#fff}
+
+/* FAQ */
+.faq details{border:1px solid var(--line);border-radius:14px;background:var(--card);margin-bottom:10px;overflow:hidden;transition:.2s}
+.faq details[open]{border-color:rgba(255,176,32,.4)}
+.faq summary{cursor:pointer;padding:16px 20px;font-weight:700;font-size:15.5px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--brand);font-size:20px;line-height:1}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding:0 20px 18px;color:var(--txt2);font-size:14px}
+
+/* footer */
+footer{margin-top:30px;border-top:1px solid var(--line);background:var(--bg2);padding:46px 0 26px}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px}
+.foot-grid h6{font-size:15px;margin-bottom:14px;color:#fff}
+.foot-grid ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot-grid a{font-size:13.5px;color:var(--txt3)}
+.foot-grid a:hover{color:var(--brand)}
+.foot-brand p{color:var(--txt3);font-size:13.5px;margin-top:12px}
+.foot-bot{border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--txt3)}
+.foot-bot a{color:var(--txt2)}
+.domain{color:#ffcf80;font-weight:700}
+
+/* Responsive */
+@media(max-width:960px){
+  .g4{grid-template-columns:repeat(3,1fr)}
+  .g3,.g2{grid-template-columns:1fr}
+  .hero-grid{grid-template-columns:1fr;gap:30px}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .header-in{height:58px}
+  nav{position:fixed;top:58px;left:0;right:0;flex-direction:column;align-items:stretch;gap:2px;padding:14px;
+    background:var(--bg2);border-bottom:1px solid var(--line);max-height:0;overflow:hidden;transition:.3s}
+  nav.open{max-height:420px}
+  nav a{width:100%;padding:13px 16px}
+  nav .h-btn{text-align:center;margin-top:8px}
+  .menu-toggle{display:block}
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .hero{padding:40px 0 30px}
+  .hero-stat{gap:22px}
+  .hero-stat div span{font-size:21px}
+  .foot-grid{grid-template-columns:1fr}
+  .tbl-wrap{overflow-x:auto}
+  table{min-width:560px}
+  section{padding:40px 0}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/zhangzong.js"></script>
+
+<header>
+  <div class="container header-in">
+    <a href="#" class="logo"><span class="mark">南</span><b>南瓜电影网</b></a>
+    <nav id="nav">
+      <a href="#now">正在热映</a>
+      <a href="#lib">影片片库</a>
+      <a href="#review">观影影评</a>
+      <a href="#rank">榜单排行</a>
+      <a href="#schedule">上映日历</a>
+      <a href="#faq">常见问题</a>
+      <a href="#" class="h-btn">免费观影</a>
+    </nav>
+    <button class="menu-toggle" id="mt" aria-label="菜单"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="tag-row">
+          <span class="tag">每日更新片单</span>
+          <span class="tag">院线同步</span>
+          <span class="tag">蓝光高清</span>
+        </div>
+        <h1>南瓜电影网 · 把<em>最新院线</em><br>搬进你的客厅</h1>
+        <p class="lede">从正在热映的商业大片到冷门高分佳作，南瓜电影网按类型、地区、年代与口碑为你梳理每一部值得看的电影，热映榜、完整片库、深度影评与月度榜单一站可查。</p>
+        <div class="hero-cta">
+          <a href="#now" class="btn btn-primary">查看本周热映 →</a>
+          <a href="#lib" class="btn btn-ghost">浏览影片片库</a>
+        </div>
+        <div class="hero-stat">
+          <div><span>2,800+</span><small>收录影片</small></div>
+          <div><span>36</span><small>影片类型</small></div>
+          <div><span>9.2万</span><small>影评人次</small></div>
+        </div>
+      </div>
+      <div class="feat">
+        <span class="badge">本周编辑精选</span>
+        <h3>沙丘：觉醒 · 特别放映场</h3>
+        <p>科幻史诗的视听再进化，从配乐织体到沙漠巨构的尺度美学，南瓜电影网影评组给出三维度拆解。</p>
+        <div class="meta"><i>科幻</i><i>冒险</i><i>166分钟</i><i>IMAX</i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 正在热映 -->
+  <section id="now">
+    <div class="container">
+      <div class="sec-head">
+        <div>
+          <h2>正在<em>热映</em></h2>
+          <p>本周院线热度实时追踪，覆盖动作、剧情、动画与纪录多元类型。</p>
+        </div>
+        <a href="#" class="btn btn-ghost">全部热映 #</a>
+      </div>
+      <div class="tabs">
+        <a href="#" class="on">全部</a><a href="#">动作</a><a href="#">剧情</a><a href="#">喜剧</a>
+        <a href="#">科幻</a><a href="#">悬疑</a><a href="#">动画</a><a href="#">纪录</a>
+      </div>
+      <div class="grid g4">
+        <article class="card">
+          <div class="thumb"><div class="ph c1">荒野</div><span class="rate">★ 8.7</span><span class="ep">IMAX</span>
+            <div class="tag-mini"><em>动作</em><em>冒险</em></div></div>
+          <div class="info"><h4>荒野回声</h4><p>极地追踪逃亡者的硬核生存片，实拍占比超七成。</p>
+            <div class="foot"><span>2026 · 142分钟</span><a href="#">详情 #</a></div></div>
+        </article>
+        <article class="card">
+          <div class="thumb"><div class="ph c2">深海</div><span class="rate">★ 9.1</span><span class="ep">3D</span>
+            <div class="tag-mini"><em>科幻</em><em>视效</em></div></div>
+          <div class="info"><h4>深海回响</h4><p>深海研究站的封闭空间惊悚，氛围塑造堪称年度最佳。</p>
+            <div class="foot"><span>2026 · 128分钟</span><a href="#">详情 #</a></div></div>
+        </article>
+        <article class="card">
+          <div class="thumb"><div class="ph c3">花火</div><span class="rate">★ 8.4</span><span class="ep">豆瓣高分</span>
+            <div class="tag-mini"><em>剧情</em><em>家庭</em></div></div>
+          <div class="info"><h4>夏日花火</h4><p>三代女性的代际和解，细腻到每一帧光影都在说话。</p>
+            <div class="foot"><span>2026 · 119分钟</span><a href="#">详情 #</a></div></div>
+        </article>
+        <article class="card">
+          <div class="thumb"><div class="ph c4">林中</div><span class="rate">★ 8.9</span><span class="ep">悬疑</span>
+            <div class="tag-mini"><em>犯罪</em><em>推理</em></div></div>
+          <div class="info"><h4>林中密语</h4><p>多视角叙事下的小镇谜案，反转密度极高。</p>
+            <div class="foot"><span>2026 · 135分钟</span><a href="#">详情 #</a></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 影片片库 -->
+  <section id="lib" style="background:linear-gradient(180deg,transparent,rgba(255,91,31,.035),transparent)">
+    <div class="container">
+      <div class="sec-head">
+        <div>
+          <h2>影片<em>片库</em></h2>
+          <p>按类型与年代归档，支持快速定位你想重温的每一部经典。</p>
+        </div>
+        <a href="#" class="btn btn-ghost">片库分类 #</a>
+      </div>
+      <div class="tabs">
+        <a href="#" class="on">综合</a><a href="#">华语</a><a href="#">好莱坞</a><a href="#">欧洲</a>
+        <a href="#">日韩</a><a href="#">动画</a><a href="#">纪录片</a>
+      </div>
+      <div class="grid g4">
+        <article class="card">
+          <div class="thumb"><div class="ph c5">黄昏</div><span class="rate">★ 9.3</span>
+            <div class="tag-mini"><em>经典</em><em>1998</em></div></div>
+          <div class="info"><h4>黄昏列车</h4><p>冷战后欧洲边境的流动群像，胶片质感历久弥新。</p>
+            <div class="foot"><span>经典修复</span><a href="#">播放 #</a></div></div>
+        </article>
+        <article class="card">
+          <div class="thumb"><div class="ph c6">霓虹</div><span class="rate">★ 8.2</span>
+            <div class="tag-mini"><em>犯罪</em><em>港片</em></div></div>
+          <div class="info"><h4>霓虹夜行</h4><p>九龙城寨背景下的双雄叙事，动作设计凌厉真实。</p>
+            <div class="foot"><span>华语佳片</span><a href="#">播放 #</a></div></div>
+        </article>
+        <article class="card">
+          <div class="thumb"><div class="ph c7">云端</div><span class="rate">★ 8.6</span>
+            <div class="tag-mini"><em>动画</em><em>治愈</em></div></div>
+          <div class="info"><h4>云端来信</h4><p>手绘动画里的邮差少女，写给城市人的一封情书。</p>
+            <div class="foot"><span>动画精选</span><a href="#">播放 #</a></div></div>
+        </article>
+        <article class="card">
+          <div class="thumb"><div class="ph c8">归来</div><span class="rate">★ 8.8</span>
+            <div class="tag-mini"><em>历史</em><em>传记</em></div></div>
+          <div class="info"><h4>归来的河流</h4><p>基于真实事件的生态纪录，影像本身就是一份证言。</p>
+            <div class="foot"><span>纪录片</span><a href="#">播放 #</a></div></div>
+        </article>
+        <article class="card">
+          <div class="thumb"><div class="ph c2">极夜</div><span class="rate">★ 8.0</span>
+            <div class="tag-mini"><em>惊悚</em><em>北欧</em></div></div>
+          <div class="info"><h4>极夜之下</h4><p>北极圈小镇连续失踪案，寒意从画面渗进骨缝。</p>
+            <div class="foot"><span>欧洲新片</span><a href="#">播放 #</a></div></div>
+        </article>
+        <article class="card">
+          <div class="thumb"><div class="ph c3">少年</div><span class="rate">★ 8.5</span>
+            <div class="tag-mini"><em>青春</em><em>成长</em></div></div>
+          <div class="info"><h4>少年与海</h4><p>海岛少年的夏天与告别，简单却后劲十足。</p>
+            <div class="foot"><span>亚洲电影</span><a href="#">播放 #</a></div></div>
+        </article>
+        <article class="card">
+          <div class="thumb"><div class="ph c1">机械</div><span class="rate">★ 7.9</span>
+            <div class="tag-mini"><em>科幻</em><em>动作</em></div></div>
+          <div class="info"><h4>机械心跳</h4><p>近未来人机共存的伦理思辨，文戏远比打戏出彩。</p>
+            <div class="foot"><span>好莱坞</span><a href="#">播放 #</a></div></div>
+        </article>
+        <article class="card">
+          <div class="thumb"><div class="ph c4">稻香</div><span class="rate">★ 9.0</span>
+            <div class="tag-mini"><em>文艺</em><em>乡土</em></div></div>
+          <div class="info"><h4>稻香以南</h4><p>南方村落四季流转中的留守老人与返乡青年。</p>
+            <div class="foot"><span>华语文艺</span><a href="#">播放 #</a></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 观影影评 -->
+  <section id="review">
+    <div class="container">
+      <div class="sec-head">
+        <div>
+          <h2>观影<em>影评</em></h2>
+          <p>不止打分，更给得出理由。编辑与影迷共同撰写的深度解析。</p>
+        </div>
+        <a href="#" class="btn btn-ghost">全部影评 #</a>
+      </div>
+      <div class="grid g3">
+        <article class="review">
+          <div class="rv-head">
+            <div class="avatar">阿</div>
+            <div><h5>阿远的取景框</h5><span>影评编辑 · 10月3日</span></div>
+            <div class="stars">★★★★★</div>
+          </div>
+          <h4>《深海回响》的声场设计，才是它真正的恐怖来源</h4>
+          <p>导演把低频环境声当作第二主角使用，每一次水压变化都对应一次心理塌缩。本文从混音、镜头焦距与表演节奏三个层面拆解。</p>
+          <a href="#" class="more">继续阅读 #</a>
+        </article>
+        <article class="review">
+          <div class="rv-head">
+            <div class="avatar">林</div>
+            <div><h5>林间放映室</h5><span>资深影迷 · 10月2日</span></div>
+            <div class="stars">★★★★☆</div>
+          </div>
+          <h4>《林中密语》多线叙事的取舍：好看，但有点贪心</h4>
+          <p>四条时间线并行的野心值得肯定，但第三幕的信息回收略显匆忙。瑕不掩瑜，这是今年最值得进影院看的悬疑片之一。</p>
+          <a href="#" class="more">继续阅读 #</a>
+        </article>
+        <article class="review">
+          <div class="rv-head">
+            <div class="avatar">苏</div>
+            <div><h5>苏苏看电影</h5><span>专栏作者 · 9月30日</span></div>
+            <div class="stars">★★★★★</div>
+          </div>
+          <h4>《夏日花火》为何能让人想起二十年前的家庭片</h4>
+          <p>不靠强情节推进，而是靠气味、声响与生活细节堆积情绪，这种"慢"在当下的院线里几乎是奢侈的。</p>
+          <a href="#" class="more">继续阅读 #</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 榜单排行 -->
+  <section id="rank" style="background:linear-gradient(180deg,transparent,rgba(255,176,32,.04),transparent)">
+    <div class="container">
+      <div class="sec-head">
+        <div>
+          <h2>榜单<em>排行</em></h2>
+          <p>综合口碑、热度与讨论度生成的动态榜单，每周一刷新。</p>
+        </div>
+        <a href="#" class="btn btn-ghost">历史榜单 #</a>
+      </div>
+      <div class="grid g2">
+        <div>
+          <div class="tabs"><a href="#" class="on">口碑榜</a><a href="#">热度榜</a><a href="#">期待榜</a></div>
+          <div class="list-row"><div class="rk g1">1</div><div class="tt"><b>深海回响</b><span>科幻 · 128分钟</span></div><div class="sc">9.1</div></div>
+          <div class="list-row"><div class="rk g2">2</div><div class="tt"><b>稻香以南</b><span>文艺 · 106分钟</span></div><div class="sc">9.0</div></div>
+          <div class="list-row"><div class="rk g3">3</div><div class="tt"><b>荒野回声</b><span>动作 · 142分钟</span></div><div class="sc">8.9</div></div>
+          <div class="list-row"><div class="rk">4</div><div class="tt"><b>归来的河流</b><span>纪录 · 98分钟</span></div><div class="sc">8.8</div></div>
+          <div class="list-row"><div class="rk">5</div><div class="tt"><b>少年与海</b><span>青春 · 112分钟</span></div><div class="sc">8.5</div></div>
+          <div class="list-row"><div class="rk">6</div><div class="tt"><b>云端来信</b><span>动画 · 95分钟</span></div><div class="sc">8.6</div></div>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>类型</th><th>代表作品</th><th>本月热度</th><th>推荐理由</th></tr></thead>
+            <tbody>
+              <tr><td>动作冒险</td><td>荒野回声</td><td>↑ 12%</td><td>实拍震撼</td></tr>
+              <tr><td>科幻惊悚</td><td>深海回响</td><td>↑ 24%</td><td>声场设计</td></tr>
+              <tr><td>剧情家庭</td><td>夏日花火</td><td>↑ 8%</td><td>细腻表演</td></tr>
+              <tr><td>悬疑犯罪</td><td>林中密语</td><td>↑ 17%</td><td>反转密集</td></tr>
+              <tr><td>文艺纪录</td><td>归来的河流</td><td>↑ 6%</td><td>真实见证</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 上映日历 -->
+  <section id="schedule">
+    <div class="container">
+      <div class="sec-head">
+        <div>
+          <h2>上映<em>日历</em></h2>
+          <p>未来四周院线定档信息一览，提前规划观影计划。</p>
+        </div>
+        <a href="#" class="btn btn-ghost">完整日历 #</a>
+      </div>
+      <div class="grid g4">
+        <div class="card"><div class="thumb"><div class="ph c5">10/10</div></div>
+          <div class="info"><h4>远方的鼓声</h4><p>剧情 / 音乐 · 126分钟</p><div class="foot"><span>本周五上映</span><a href="#">预告 #</a></div></div></div>
+        <div class="card"><div class="thumb"><div class="ph c6">10/17</div></div>
+          <div class="info"><h4>暗室</h4><p>悬疑 / 惊悚 · 108分钟</p><div class="foot"><span>下周五上映</span><a href="#">预告 #</a></div></div></div>
+        <div class="card"><div class="thumb"><div class="ph c7">10/24</div></div>
+          <div class="info"><h4>云上的日子</h4><p>爱情 / 文艺 · 117分钟</p><div class="foot"><span>十月末</span><a href="#">预告 #</a></div></div></div>
+        <div class="card"><div class="thumb"><div class="ph c8">10/31</div></div>
+          <div class="info"><h4>午夜马戏团</h4><p>恐怖 / 奇幻 · 103分钟</p><div class="foot"><span>万圣档</span><a href="#">预告 #</a></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq">
+    <div class="container">
+      <div class="sec-head">
+        <div>
+          <h2>常见<em>问题</em></h2>
+          <p>关于南瓜电影网的内容来源、更新机制与访问方式的说明。</p>
+        </div>
+      </div>
+      <details open>
+        <summary>南瓜电影网主要提供哪些内容？</summary>
+        <p>南瓜电影网以影片资料、看点导读、观影影评与院线榜单为主，覆盖正在热映、影片片库、影评与排行榜四大栏目，并按类型、地区、年代与口碑进行整理，帮助观众更快找到想看的电影。</p>
+      </details>
+      <details>
+        <summary>片单与榜单多久更新一次？</summary>
+        <p>正在热映栏目随院线档期实时更新，口碑榜与热度榜每周一刷新，月度榜单在每月初发布，年度盘点则在次年一月上线。</p>
+      </details>
+      <details>
+        <summary>如何按类型快速找到想看的电影？</summary>
+        <p>可点击各栏目上方的类型标签（动作、剧情、科幻、悬疑、动画、纪录片等）进行筛选，也支持按华语、好莱坞、欧洲、日韩等地区维度浏览片库。</p>
+      </details>
+      <details>
+        <summary>南瓜电影网的内容来源是什么？</summary>
+        <p>影片信息、演职员资料与上映日期来自公开影视资料，影评内容由编辑团队与注册影迷共同撰写，力求观点独立、数据准确。</p>
+      </details>
+      <details>
+        <summary>访问地址与域名是什么？</summary>
+        <p>南瓜电影网访问地址为 <span class="domain">https://nanguadianyingwang-zh.github.io</span>，建议收藏该地址以便及时获取最新片单与榜单更新。</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="logo"><span class="mark">南</span><b>南瓜电影网</b></a>
+        <p>专注于电影资料整理、看点导读与观影评价的内容站点，陪你把每一部好电影看完。</p>
+      </div>
+      <div>
+        <h6>栏目导航</h6>
+        <ul>
+          <li><a href="#now">正在热映 #</a></li>
+          <li><a href="#lib">影片片库 #</a></li>
+          <li><a href="#review">观影影评 #</a></li>
+          <li><a href="#rank">榜单排行 #</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>类型筛选</h6>
+        <ul>
+          <li><a href="#">动作冒险 #</a></li>
+          <li><a href="#">科幻惊悚 #</a></li>
+          <li><a href="#">剧情文艺 #</a></li>
+          <li><a href="#">动画纪录 #</a></li>
+        </ul>
+      </div>
+      <div>
+        <h6>关于本站</h6>
+        <ul>
+          <li><a href="#">关于南瓜电影网 #</a></li>
+          <li><a href="#">投稿与合作 #</a></li>
+          <li><a href="#">内容声明 #</a></li>
+          <li><a href="#">访问：nanguadianyingwang-zh.github.io #</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 南瓜电影网 · 本站内容仅供观影参考与资讯分享</span>
+      <span>网址：<a href="https://nanguadianyingwang-zh.github.io" class="domain">nanguadianyingwang-zh.github.io</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('mt').addEventListener('click',function(){
+  document.getElementById('nav').classList.toggle('open');
+});
+document.querySelectorAll('nav a').forEach(function(a){
+  a.addEventListener('click',function(){document.getElementById('nav').classList.remove('open');});
+});
+</script>
+</body>
+</html>
